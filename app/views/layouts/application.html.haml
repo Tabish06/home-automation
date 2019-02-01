@@ -16,4 +16,6 @@
         %ul.nav.navbar-nav.navbar-right
           %li=link_to 'Home', '#'
     .container
+      - flash.each do |message_type, message|
+        %div{class: "alert alert-#{message_type}"}= message
       = yield
