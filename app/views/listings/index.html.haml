@@ -1,0 +1,23 @@
+%h1 Listing listings
+
+%table
+  %thead
+    %tr
+      %th Address
+      %th Automation service
+      %th
+      %th
+      %th
+
+  %tbody
+    - @listings.each do |listing|
+      %tr
+        %td= listing.address
+        %td= listing.automation_service
+        %td= link_to 'Show', listing
+        %td= link_to 'Edit', edit_listing_path(listing)
+        %td= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Listing', new_listing_path

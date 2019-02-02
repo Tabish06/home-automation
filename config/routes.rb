@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :listings
   get 'sessions/new'
   get 'users/new'
   get 'static_pages/home'
