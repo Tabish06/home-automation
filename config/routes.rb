@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reservations
   resources :listings
   get 'sessions/new'
   get 'users/new'
