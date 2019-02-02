@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   def new
-    @user = User.new
+    if !logged_in?
+      @user = User.new
+    end
   end
 
   def show
