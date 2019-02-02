@@ -1,4 +1,5 @@
 class ReservationsController < ApplicationController
+  before_action :logged_in?
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
 
   # GET /reservations

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :logged_in? , only: [:show]
   def new
     if !logged_in?
       @user = User.new
@@ -6,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   def create

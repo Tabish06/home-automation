@@ -14,4 +14,6 @@ class User < ApplicationRecord
       BCrypt::Password.create(string, cost: cost)
     end
 
+    has_many :listings
+
 end
