@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: ['omniauth']
+
   def new
 
   end
@@ -16,6 +18,11 @@ class SessionsController < ApplicationController
 
       render 'new'
     end
+  end
+
+  def omniauth
+    # byebug
+    render status: 200,json: {status: 'OK'}
   end
 
   def destroy

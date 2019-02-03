@@ -25,6 +25,8 @@ gem 'haml'
 gem 'haml-rails'
 gem 'bootstrap-sass', '3.3.7'
 gem 'jquery-rails'
+gem 'delayed_job_active_record'
+
 
 # gem 'jquery-rails'
 
