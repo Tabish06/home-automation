@@ -2,6 +2,6 @@
 
 = render 'form'
 
-= link_to 'Show', @listing
+= link_to 'Show', [current_user,@listing]
 \|
-= link_to 'Back', listings_path
+= link_to 'Back', user_listings_path

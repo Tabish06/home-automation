@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  resources :reservations
-  resources :listings
+  # resources :listings
   get 'sessions/new'
   get 'users/new'
   get 'static_pages/home'
@@ -14,7 +13,11 @@ Rails.application.routes.draw do
   get '/omniauth', to: 'sessions#omniauth'
 
   post '/omniauth', to: 'sessions#omniauth'
-  resources :users
+  resources :users do
+    resources :listings do
+    	resources :reservations
+    end
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
