@@ -5,7 +5,7 @@ class ReservationsController < ApplicationController
   # GET /reservations
   # GET /reservations.json
   def index
-    @reservations = Reservation.all
+    @reservations = Reservation.preload(:listing).joins(:listing).where(listings: {user_id: current_user.id})
   end
 
   # GET /reservations/1
@@ -15,6 +15,7 @@ class ReservationsController < ApplicationController
 
   # GET /reservations/new
   def new
+    @listing = Listing.where(id: params[:listing_id],user_id: current_user.id).first
     @reservation = Reservation.new
   end
 
@@ -26,10 +27,11 @@ class ReservationsController < ApplicationController
   # POST /reservations.json
   def create
     @reservation = Reservation.new(reservation_params)
-
+    @listing = Listing.where(id: params[:listing_id],user_id: current_user.id).first
+    @reservation.listing = @listing
     respond_to do |format|
       if @reservation.save
-        format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
+        format.html { redirect_to [current_user,@listing,@reservation], notice: 'Reservation was successfully created.' }
         format.json { render :show, status: :created, location: @reservation }
       else
         format.html { render :new }
@@ -43,7 +45,7 @@ class ReservationsController < ApplicationController
   def update
     respond_to do |format|
       if @reservation.update(reservation_params)
-        format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
+        format.html { redirect_to [current_user,@listing,@reservation], notice: 'Reservation was successfully updated.' }
         format.json { render :show, status: :ok, location: @reservation }
       else
         format.html { render :edit }
@@ -65,7 +67,7 @@ class ReservationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation
-      @reservation = Reservation.find(params[:id])
+      @reservation = Reservation.joins(:listing).where(id: params[:id], listings: {user_id: current_user.id}).first
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

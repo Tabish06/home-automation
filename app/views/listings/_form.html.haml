@@ -12,5 +12,9 @@
   .field
     = f.label :automation_service
     = f.check_box :automation_service
+  .field
+    = f.label :devices
+    = f.collection_check_boxes(:device_ids, Device.all, :id, :to_s)
+
   .actions
     = f.submit 'Save'

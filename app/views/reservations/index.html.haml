@@ -14,10 +14,10 @@
       %tr
         %td= reservation.starttime
         %td= reservation.endtime
-        %td= link_to 'Show', reservation
-        %td= link_to 'Edit', edit_reservation_path(reservation)
-        %td= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Show', [current_user,reservation.listing,reservation]
+        %td= link_to 'Edit', edit_user_listing_reservation_path(current_user,reservation.listing,reservation)
+        %td= link_to 'Destroy', [current_user,reservation.listing,reservation], method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
-= link_to 'New Reservation', new_user_reservation_path
+= link_to 'New Reservation', new_user_listing_reservation_path

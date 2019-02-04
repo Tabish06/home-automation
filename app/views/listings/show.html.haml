@@ -7,6 +7,8 @@
   %b Automation service:
   = @listing.automation_service
 
+= link_to 'New Reservation', new_user_listing_reservation_path(current_user,@listing)
+= link_to 'Show Reservation', user_listing_reservations_path(listing_id:@listing)
 = link_to 'Edit', edit_user_listing_path(@listing)
 \|
 = link_to 'Back', user_listings_path
