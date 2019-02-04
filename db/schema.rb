@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_03_201729) do
+ActiveRecord::Schema.define(version: 2019_02_04_065217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,19 +30,24 @@ ActiveRecord::Schema.define(version: 2019_02_03_201729) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
+  create_table "device_type", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devices", force: :cascade do |t|
     t.string "name"
     t.boolean "switch"
     t.string "smart_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "devices_listings", id: false, force: :cascade do |t|
-    t.bigint "device_id"
     t.bigint "listing_id"
-    t.index ["device_id"], name: "index_devices_listings_on_device_id"
-    t.index ["listing_id"], name: "index_devices_listings_on_listing_id"
+    t.bigint "device_type_id"
+    t.bigint "user_id"
+    t.index ["device_type_id"], name: "index_devices_on_device_type_id"
+    t.index ["listing_id"], name: "index_devices_on_listing_id"
+    t.index ["user_id"], name: "index_devices_on_user_id"
   end
 
   create_table "listings", force: :cascade do |t|

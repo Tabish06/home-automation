@@ -1,6 +1,8 @@
 class Device < ApplicationRecord
-	has_and_belongs_to_many :listings
-	def to_s
-		self.name
-	end
+    belongs_to :device_type
+    belongs_to :user
+    scope :valid_devices, -> {where(listing_id: nil)}
+    def to_s
+        self.name
+    end
 end

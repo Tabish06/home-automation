@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   post '/omniauth', to: 'sessions#omniauth'
   resources :users do
+  	resources :devices
     resources :listings do
     	resources :reservations
     end

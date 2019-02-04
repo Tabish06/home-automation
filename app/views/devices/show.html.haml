@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @device.name
+%p
+  %b Switch:
+  = @device.switch
+%p
+  %b Smart:
+  = @device.smart_id
+
+= link_to 'Edit', edit_user_device_path(@device)
+\|
+= link_to 'Back', user_devices_path

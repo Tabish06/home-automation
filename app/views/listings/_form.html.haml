@@ -14,7 +14,9 @@
     = f.check_box :automation_service
   .field
     = f.label :devices
-    = f.collection_check_boxes(:device_ids, Device.all, :id, :to_s)
-
+    -if @listing.id == nil
+      = f.collection_check_boxes(:device_ids, Device.valid_devices, :id, :to_s)
+    - else 
+      = f.collection_check_boxes(:device_ids, Device.where('listing_id is NULL OR listing_id = ?',@listing.id), :id, :to_s)
   .actions
     = f.submit 'Save'

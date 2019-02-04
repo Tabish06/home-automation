@@ -1,0 +1,25 @@
+%h1 Listing devices
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Switch
+      %th Smart
+      %th
+      %th
+      %th
+
+  %tbody
+    - @devices.each do |device|
+      %tr
+        %td= device.name
+        %td= device.switch
+        %td= device.smart_id
+        %td= link_to 'Show', [current_user,device]
+        %td= link_to 'Edit', edit_user_device_path(current_user,device)
+        %td= link_to 'Destroy', [current_user,device], method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Device', new_user_device_path

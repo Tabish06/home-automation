@@ -26,7 +26,10 @@ gem 'haml-rails'
 gem 'bootstrap-sass', '3.3.7'
 gem 'jquery-rails'
 gem 'delayed_job_active_record'
+gem 'oauth2'
+gem 'json'
 
+gem 'httparty'
 
 # gem 'jquery-rails'
 
