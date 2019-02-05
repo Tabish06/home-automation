@@ -1,11 +1,22 @@
 class ListingsController < ApplicationController
   before_action :logged_in?
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
-
   # GET /listings
   # GET /listings.json
   def index
     @listings = Listing.preload(:devices).where(user_id: current_user.id)
+    @listings.each do |listing|
+      if listing.token != nil
+        # print('here')
+        endpoints_uri = 'https://graph.api.smartthings.com/api/smartapps/endpoints'
+        # byebug
+        response =HTTParty.get(endpoints_uri + '/switches',:headers => { "Authorization" => "Bearer #{listing.token}"})
+        # response =HTTParty.put(endpoints_uri + '/switches/off',:headers => { "Authorization" => "Bearer #{listing.token}"})
+        
+        json = JSON.parse(response.body)
+        print(json)
+      end
+    end
   end
 
   # GET /listings/1

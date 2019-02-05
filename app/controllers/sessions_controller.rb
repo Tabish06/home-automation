@@ -23,9 +23,7 @@ class SessionsController < ApplicationController
   def authorize
     if listing = Listing.find_by_id(params[:listing_id])
       @@client = OAuth2::Client.new(listing.client_id, listing.client_secret, options)
-      session[:client_id] = listing.client_id
-      session[:client_secret] = listing.client_secret
-      # byebug
+      session[:listing_id] = listing.id
       if Rails.env == 'development'
         redirect_uri = 'https://35e48889.ngrok.io/oauth/callback'
       else
@@ -48,12 +46,13 @@ class SessionsController < ApplicationController
     end
     code = params['code']
     response = @@client.auth_code.get_token(code, redirect_uri: redirect_uri, scope: 'app')
-    if listing = Listing.where(client_id: session[:client_id]).first
+    print(response.token)
+    if listing = Listing.where(id: session[:listing_id]).first
       token = response.token
       listing.update_column(:token,token)
     end
     flash[:success]
-    # redirect_to root_url, status: 301
+    redirect_to root_url
 
   end
 

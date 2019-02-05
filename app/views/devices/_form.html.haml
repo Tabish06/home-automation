@@ -17,6 +17,6 @@
     = f.text_field :smart_id
   .field
     =f.label :device_type_id
-    =f.collection_select(:device_type_id, Device.valid_devices, :id, :name) 
+    =f.collection_select(:device_type_id, DeviceType.all, :id, :name) 
   .actions
     = f.submit 'Save'
