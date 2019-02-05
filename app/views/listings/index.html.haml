@@ -1,11 +1,12 @@
 Listing listings
-%table
+%table{margin: 5}
   %thead
     %tr
       %th Address
       %th Automation service
       %th Devices
-      %th 
+      %th  
+      %th
       %th
       %th
 
@@ -19,7 +20,7 @@ Listing listings
         %td= link_to 'Show', [current_user,listing]
         %td= link_to 'Edit', edit_user_listing_path(current_user,listing)
         %td= link_to 'Destroy', [current_user,listing], method: :delete, data: { confirm: 'Are you sure?' }
-
+        %td= link_to 'Authorize SmartThings', authorize_path(listing_id: listing.id)
 %br
 
 = link_to 'New Listing', new_user_listing_path

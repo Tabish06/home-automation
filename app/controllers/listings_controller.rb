@@ -71,6 +71,6 @@ class ListingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:address, :automation_service,{device_ids: []})
+      params.require(:listing).permit(:address,:client_id,:client_secret, :automation_service,{device_ids: []})
     end
 end

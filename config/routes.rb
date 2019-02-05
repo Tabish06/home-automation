@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new', as: 'login'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy', as: 'logout'
-  get '/omniauth', to: 'sessions#omniauth'
-
-  post '/omniauth', to: 'sessions#omniauth'
+  get '/oauth/callback', to: 'sessions#omniauth'
+  post '/oauth/callback', to: 'sessions#omniauth'
+  get '/authorize', to: 'sessions#authorize'
   resources :users do
   	resources :devices
     resources :listings do

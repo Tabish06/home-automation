@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_04_065217) do
+ActiveRecord::Schema.define(version: 2019_02_05_051822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2019_02_04_065217) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
-  create_table "device_type", force: :cascade do |t|
+  create_table "device_types", id: :bigint, default: -> { "nextval('device_type_id_seq'::regclass)" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -56,6 +56,9 @@ ActiveRecord::Schema.define(version: 2019_02_04_065217) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.string "client_id"
+    t.string "client_secret"
+    t.string "token"
     t.index ["user_id"], name: "index_listings_on_user_id"
   end
 

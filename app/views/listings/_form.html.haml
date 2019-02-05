@@ -10,13 +10,19 @@
     = f.label :address
     = f.text_field :address
   .field
+    = f.label :client_id
+    = f.text_field :client_id
+  .field
+    = f.label :client_secret
+    = f.text_field :client_secret
+  .field
     = f.label :automation_service
     = f.check_box :automation_service
   .field
     = f.label :devices
     -if @listing.id == nil
-      = f.collection_check_boxes(:device_ids, Device.valid_devices, :id, :to_s)
+      = f.collection_check_boxes(:device_ids, Device.valid_devices, :id, :name)
     - else 
-      = f.collection_check_boxes(:device_ids, Device.where('listing_id is NULL OR listing_id = ?',@listing.id), :id, :to_s)
+      = f.collection_check_boxes(:device_ids, Device.where('listing_id is NULL OR listing_id = ?',@listing.id), :id, :name, {:selected => @listing.devices.map(&:id)})
   .actions
     = f.submit 'Save'
