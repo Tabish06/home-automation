@@ -2,4 +2,8 @@
   %aside.col-md-4
     %section
       = @user.name
-      
+      %br
+      .btn-primary.btn.link_button=button_to 'Listings', user_listings_path(user_id: current_user),method: :get
+      %br
+      %br
+      .btn-primary.btn.link_button=button_to "Devices",user_devices_path(user_id: current_user),method: :get
