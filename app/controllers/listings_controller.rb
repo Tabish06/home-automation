@@ -8,13 +8,14 @@ class ListingsController < ApplicationController
     @listings.each do |listing|
       if listing.token != nil
         # print('here')
-        endpoints_uri = 'https://graph.api.smartthings.com/api/smartapps/endpoints'
-        # byebug
-        response =HTTParty.get(endpoints_uri + '/switches',:headers => { "Authorization" => "Bearer #{listing.token}"})
-        # response =HTTParty.put(endpoints_uri + '/switches/off',:headers => { "Authorization" => "Bearer #{listing.token}"})
-        
-        json = JSON.parse(response.body)
-        print(json)
+        lights = Listing.get_status_of_lights(listing.token)
+        device_hash = {}
+        lights.each{|v| device_hash[v['name']] = v['value']}
+        listing.devices.each do |device|
+          if value = device_hash[device.smart_id]
+            device.switch = value == 'off' ? false : true
+          end
+        end
       end
     end
   end

@@ -16,7 +16,10 @@ Listing listings
         %td= listing.address
         %td= listing.automation_service
         -listing.devices.collect{|d| d.name}
-        %td= listing.devices.join(',')
+        %td
+          - listing.devices.each do |device|
+            = "#{device.name} status: #{device.switch ? 'on' : 'off'}"
+            %br
         %td= link_to 'Show', [current_user,listing]
         %td= link_to 'Edit', edit_user_listing_path(current_user,listing)
         %td= link_to 'Destroy', [current_user,listing], method: :delete, data: { confirm: 'Are you sure?' }
