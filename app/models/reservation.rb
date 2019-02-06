@@ -3,7 +3,7 @@ class Reservation < ApplicationRecord
   validates_presence_of :starttime, :endtime
   scope :overlapping, -> (interval){ where("listing_id = ?  AND starttime <= ? AND ? <= endtime", interval.listing_id, interval.endtime, interval.starttime)}
   validate :cannot_overlap_dates
-  afer_save :create_automation
+  after_save :create_automation
   # before_save :check_for_conflicts
   def cannot_overlap_dates
     overlaps = Reservation.overlapping(self).count
