@@ -8,13 +8,13 @@
 
   .field
     = f.label :address
-    = f.text_field :address,maxlength: 255
+    = f.text_field :address,maxlength: 255, class: 'form-control',maxlength: 255
   .field
     = f.label :client_id
-    = f.text_field :client_id,maxlength: 255
+    = f.text_field :client_id,maxlength: 255, class: 'form-control',maxlength: 255
   .field
     = f.label :client_secret
-    = f.text_field :client_secret,maxlength: 255
+    = f.text_field :client_secret,maxlength: 255, class: 'form-control',maxlength: 255
   .field
     = f.label :automation_service
     = f.check_box :automation_service

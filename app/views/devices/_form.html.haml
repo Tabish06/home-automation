@@ -8,13 +8,13 @@
 
   .field
     = f.label :name
-    = f.text_field :name,maximum: 255
+    = f.text_field :name,maxlength: 255, class: 'form-control'
   .field
     = f.label :switch
     = f.check_box :switch
   .field
     = f.label :smart_id
-    = f.text_field :smart_id,maximum: 255
+    = f.text_field :smart_id,maxlength: 255, class: 'form-control'
   .field
     =f.label :device_type_id
     =f.collection_select(:device_type_id, DeviceType.all, :id, :name) 
