@@ -6,16 +6,16 @@
     =form_for(@user, url: signup_path) do |f|
       = render 'shared/error_messages'
       =f.label :name
-      =f.text_field :name, class: 'form-control'
+      =f.text_field :name, class: 'form-control',maxlength: 255
       %br
       =f.label :email
-      =f.text_field :email, class: 'form-control'
+      =f.text_field :email, class: 'form-control',maxlength: 255
       %br
       =f.label :password
-      =f.password_field :password, class: 'form-control'
+      =f.password_field :password, class: 'form-control',maxlength: 255
       %br
       =f.label :password_confirmation
-      =f.password_field :password_confirmation, class: 'form-control'
+      =f.password_field :password_confirmation, class: 'form-control',maxlength: 255
       %br
       =f.submit "Create Account" , class: 'btn btn-primary'
       %br
