@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
       if Rails.env == 'development'
         redirect_uri = 'https://35e48889.ngrok.io/oauth/callback'
       else
-        redirect_uri = request.host + '/oauth/callback'
+        redirect_uri = 'https://'+request.host + '/oauth/callback'
       end
       url = @@client.auth_code.authorize_url(redirect_uri: redirect_uri, scope: 'app')
       redirect_to url
@@ -42,7 +42,7 @@ class SessionsController < ApplicationController
     if Rails.env == 'development'
       redirect_uri = 'https://35e48889.ngrok.io/oauth/callback'
     else
-      redirect_uri = request.host + '/oauth/callback'
+      redirect_uri = 'https://'+request.host + '/oauth/callback'
     end
     code = params['code']
     response = @@client.auth_code.get_token(code, redirect_uri: redirect_uri, scope: 'app')
